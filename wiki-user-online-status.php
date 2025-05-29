@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Wiki User Online Status
- * Plugin URI: https://github.com/wikiwyrhead/webp-image-optimizer
+ * Plugin URI: https://github.com/wikiwyrhead/wiki-user-online-status
  * Description: Track and display user online/offline status similar to WP User Online plugin.
  * Version: 1.0.0
  * Author: Arnel Go
