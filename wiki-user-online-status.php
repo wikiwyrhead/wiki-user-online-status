@@ -3,13 +3,14 @@
  * Plugin Name: Wiki User Online Status
  * Plugin URI: https://github.com/wikiwyrhead/wiki-user-online-status
  * Description: Track and display user online/offline status similar to WP User Online plugin.
- * Version: 1.0.0
+ * Version: 1.0.2
  * Author: Arnel Go
  * Author URI: https://arnelbg.com/
  * License: GPLv2 or later
  * Text Domain: wiki-user-online-status
  * 
  * Changelog:
+ * 1.0.2 - Added GPL-2.0-or-later LICENSE file
  * 1.0.1 - Fixed admin page warnings and improved user data handling
  * 1.0.0 - Initial release
  */
