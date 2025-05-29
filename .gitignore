@@ -1,0 +1,71 @@
+# WordPress specific
+wp-config.php
+wp-config-*.php
+wp-content/advanced-cache.php
+wp-content/backup-db/
+wp-content/backups/
+wp-content/blogs.dir/
+wp-content/cache/
+wp-content/upgrade/
+wp-content/uploads/
+wp-content/wp-cache-config.php
+wp-content/backupwordpress-*/ 
+wp-content/debug.log
+wp-content/error_log
+
+# Plugin development
+*.log
+*.pot
+*.zip
+.DS_Store
+node_modules/
+*.sublime-*
+*.code-workspace
+
+# IDE specific files
+.idea/
+.vscode/
+*.sublime-workspace
+*.sublime-project
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+*.swo
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Composer
+/vendor/
+composer.lock
+
+# NPM
+package-lock.json
+package.json
+/node_modules/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Testing
+/coverage/
+/phpunit.xml
+phpunit.xml.dist
+
+# Build directories
+/build/
+/dist/
+
+# Local development
+*.local
+*.dev
