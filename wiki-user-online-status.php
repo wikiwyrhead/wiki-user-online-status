@@ -8,6 +8,10 @@
  * Author URI: https://arnelbg.com/
  * License: GPLv2 or later
  * Text Domain: wiki-user-online-status
+ * 
+ * Changelog:
+ * 1.0.1 - Fixed admin page warnings and improved user data handling
+ * 1.0.0 - Initial release
  */
 
 // Prevent direct access
@@ -246,15 +250,36 @@ class WikiUserOnlineStatus {
         global $wpdb;
         $timeout = date('Y-m-d H:i:s', current_time('timestamp') - $this->online_timeout);
         
-        return $wpdb->get_results(
+        $results = $wpdb->get_results(
             $wpdb->prepare(
-                "SELECT user_id, last_activity 
+                "SELECT * 
                 FROM {$this->table_name} 
                 WHERE last_activity > %s 
                 ORDER BY last_activity DESC",
                 $timeout
             )
         );
+        
+        // Add user data to each result
+        foreach ($results as &$row) {
+            $user_data = get_userdata($row->user_id);
+            if ($user_data) {
+                $row->display_name = $user_data->display_name;
+                $row->user_email = $user_data->user_email;
+                $row->roles = $user_data->roles;
+            } else {
+                $row->display_name = 'Guest';
+                $row->user_email = '';
+                $row->roles = array('none');
+            }
+            
+            // Ensure all expected properties exist
+            $row->ip_address = $row->ip_address ?? 'N/A';
+            $row->page_url = $row->page_url ?? 'N/A';
+            $row->ID = $row->user_id; // For backward compatibility
+        }
+        
+        return $results;
     }
     
     public function get_user_last_seen($user_id) {
@@ -416,13 +441,12 @@ function online_users_admin_page() {
         echo '</tr></thead><tbody>';
         
         foreach ($online_users as $user) {
-            $user_data = new WP_User($user->ID);
             echo '<tr>';
-            echo '<td>' . get_avatar($user->ID, 32) . '</td>';
-            echo '<td><strong>' . $user->display_name . '</strong><br><small>' . $user->user_email . '</small></td>';
-            echo '<td>' . implode(', ', $user_data->roles) . '</td>';
-            echo '<td>' . human_time_diff(strtotime($user->last_activity), current_time('timestamp')) . ' ago</td>';
-            echo '<td>' . $user->ip_address . '</td>';
+            echo '<td>' . get_avatar($user->user_id, 32) . '</td>';
+            echo '<td><strong>' . esc_html($user->display_name) . '</strong><br><small>' . esc_html($user->user_email) . '</small></td>';
+            echo '<td>' . esc_html(implode(', ', (array)$user->roles)) . '</td>';
+            echo '<td>' . esc_html(human_time_diff(strtotime($user->last_activity), current_time('timestamp'))) . ' ago</td>';
+            echo '<td>' . esc_html($user->ip_address) . '</td>';
             echo '<td><small>' . esc_html($user->page_url) . '</small></td>';
             echo '</tr>';
         }

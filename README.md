@@ -23,22 +23,26 @@ A lightweight WordPress plugin that tracks and displays user online/offline stat
 ### Shortcodes
 
 #### Display Online Users List
-```
+
+```php
 [online_users]
 ```
 
 #### Display Online Users Count
-```
+
+```php
 [online_users_count]
 ```
 
 ### Admin Area
+
 - The plugin adds an "Online Status" column to the Users page in WordPress admin
 - A dedicated "Online Users" page is available under the Users menu
 
 ## Customization
 
 ### CSS Styling
+
 You can customize the appearance by adding CSS to your theme's stylesheet:
 
 ```css
@@ -69,8 +73,15 @@ The plugin is optimized for performance with:
 
 ## Changelog
 
+### 1.0.1
+
+- Fixed admin page warnings and improved user data handling
+- Added proper error handling for missing user data
+- Improved security with output escaping
+
 ### 1.0.0
-* Initial release
+
+- Initial release
 
 ## License
 
